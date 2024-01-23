@@ -7,6 +7,7 @@ interface HomeContract {
     interface Model {
         fun loadWords(): Cursor
         fun loadWordsByEn(query: String): Cursor
+        fun loadWordsByUz(query: String): Cursor
     }
 
     interface View {
@@ -16,6 +17,7 @@ interface HomeContract {
     interface Presenter {
         fun loadWords()
         fun loadWordsByEn(query: String)
+        fun loadWordsByUz(query: String)
     }
 
 }

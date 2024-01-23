@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/white"
     android:layout_height="match_parent">
 
     <!--    <com.google.android.material.appbar.AppBarLayout-->
@@ -11,6 +12,8 @@
     <!--        android:layout_height="?android:actionBarSize"-->
     <!--        android:background="#7D7BC0"-->
     <!--        app:layout_constraintBottom_toTopOf="@id/recycler"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
     <!--        app:layout_constraintTop_toTopOf="parent">-->
 
     <!--        <TextView-->
@@ -28,13 +31,14 @@
 
     <LinearLayout
         android:id="@+id/linear"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="?android:actionBarSize"
         android:layout_margin="8dp"
         android:background="@drawable/bg_search"
         android:orientation="vertical"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/recycler"
+        app:layout_constraintEnd_toStartOf="@id/imgTransfer"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.SearchView
@@ -51,14 +55,36 @@
 
     </LinearLayout>
 
+    <ImageView
+        android:id="@+id/imgTransfer"
+        android:layout_width="56sp"
+        android:layout_height="56sp"
+        android:padding="10dp"
+        android:src="@drawable/ic_transfer"
+        app:layout_constraintBottom_toBottomOf="@id/linear"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/linear" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler"
         android:layout_width="match_parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:layout_height="0dp"
         android:layout_margin="8dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/linear"
         tools:listitem="@layout/item_word" />
+
+
+<!--    <in.myinnos.alphabetsindexfastscrollrecycler.IndexFastScrollRecyclerView-->
+<!--        android:id="@+id/recycler2"-->
+<!--        android:layout_width="20dp"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:layout_margin="8dp"-->
+<!--        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/linear"-->
+<!--        tools:listitem="@layout/item_word" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

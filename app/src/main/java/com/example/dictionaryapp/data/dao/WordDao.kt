@@ -11,4 +11,7 @@ interface WordDao {
 
     @Query("SELECT * FROM dictionary WHERE english LIKE :query || '%'")
     fun getAllWordsByEn(query: String) : Cursor
+
+    @Query("SELECT * FROM dictionary WHERE uzbek LIKE :query || '%'")
+    fun getAllWordsByUz(query: String) : Cursor
 }

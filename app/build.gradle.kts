@@ -63,4 +63,7 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.6")
     implementation("androidx.navigation:navigation-ui-ktx:2.7.6")
 
+
+    // A
+    implementation ("com.github.myinnos:AlphabetIndex-Fast-Scroll-RecyclerView:1.0.98")
 }

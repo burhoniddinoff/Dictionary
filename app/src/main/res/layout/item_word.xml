@@ -40,14 +40,26 @@
         tools:text="Abdulqodir" />
 
     <ImageView
-        android:id="@+id/save"
-        android:layout_width="18dp"
-        android:layout_height="18dp"
+        android:id="@+id/imgLike"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginEnd="28dp"
+        android:padding="12dp"
         android:src="@drawable/ic_favourite"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/imgSpeak"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imgSpeak"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="28dp"
+        android:padding="12dp"
+        android:src="@drawable/ic_speaker"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imgLike" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -18,4 +18,5 @@ class AppRepositoryImpl : AppRepository {
 
     override fun getAllWord(): Cursor = wordDao.getWord()
     override fun getAllWordsByEn(query: String): Cursor = wordDao.getAllWordsByEn(query)
+    override fun getAllWordsByUz(query: String): Cursor  = wordDao.getAllWordsByUz(query)
 }

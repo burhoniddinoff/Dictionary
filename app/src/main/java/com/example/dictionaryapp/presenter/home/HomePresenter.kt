@@ -14,12 +14,17 @@ class HomePresenter(private var view: HomeContract.View) : HomeContract.Presente
         executors.execute {
             view.showWords(model.loadWords())
         }
-
     }
 
     override fun loadWordsByEn(query: String) {
         executors.execute {
             view.showWords(model.loadWordsByEn(query))
+        }
+    }
+
+    override fun loadWordsByUz(query: String) {
+        executors.execute {
+            view.showWords(model.loadWordsByUz(query))
         }
     }
 

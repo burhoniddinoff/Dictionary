@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrool1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/scrool2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/usage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="25dp"
+            android:background="@drawable/bg_translate"
+            android:gravity="center"
+            android:maxWidth="150dp"
+            android:maxLines="5"
+            android:padding="10dp"
+            android:text="Hi"
+            android:textSize="25dp" />
+    </androidx.core.widget.NestedScrollView>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrool2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/uzbek"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/scrool1">
+
+        <TextView
+            android:id="@+id/translate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="25dp"
+            android:background="@drawable/bg_translate"
+            android:gravity="center"
+            android:maxWidth="150dp"
+            android:maxLines="5"
+            android:padding="10dp"
+            android:text="Salom"
+            android:textSize="25dp" />
+    </androidx.core.widget.NestedScrollView>
+
+    <ImageView
+        android:id="@+id/english"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/ic_voice_2"
+        app:layout_constraintEnd_toStartOf="@id/uzbek"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/uzbek" />
+
+    <ImageView
+        android:id="@+id/uzbek"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/ic_voice_2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/english"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.95" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Uzbek"
+        app:layout_constraintEnd_toEndOf="@id/uzbek"
+        app:layout_constraintStart_toStartOf="@id/uzbek"
+        app:layout_constraintTop_toBottomOf="@+id/uzbek" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="English"
+        app:layout_constraintEnd_toEndOf="@id/english"
+        app:layout_constraintStart_toStartOf="@id/english"
+        app:layout_constraintTop_toBottomOf="@id/english" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
