@@ -6,4 +6,13 @@
     </style>
 
     <style name="Theme.DictionaryApp" parent="Base.Theme.DictionaryApp" />
+
+    <style name="DialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/slide_in_bottom</item>
+        <item name="android:windowExitAnimation">@anim/slide_out_bottom</item>
+    </style>
+
+    <style name="bottom_navigation" parent="Widget.Design.BottomNavigationView">
+        <item name="android:elevation">0dp</item>
+    </style>
 </resources>

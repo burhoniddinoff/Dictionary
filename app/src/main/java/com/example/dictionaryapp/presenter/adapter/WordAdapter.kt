@@ -1,16 +1,26 @@
 package com.example.dictionaryapp.presenter.adapter
 
 import android.annotation.SuppressLint
+import android.app.VoiceInteractor
 import android.database.Cursor
 import android.content.Context
 import android.speech.tts.TextToSpeech
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.example.dictionaryapp.R
+import com.example.dictionaryapp.data.local.MySharedPref
+import com.example.dictionaryapp.data.model.WordData
 import com.example.dictionaryapp.databinding.ItemWordBinding
 import com.example.dictionaryapp.utils.createSpannable
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MultipartBody
+import okhttp3.OkHttpClient
+import okhttp3.Request
 import java.util.Locale
+import kotlin.system.exitProcess
 
 class WordAdapter(private var context: Context) :
     RecyclerView.Adapter<WordAdapter.WordViewHolder>(), TextToSpeech.OnInitListener {
@@ -19,25 +29,73 @@ class WordAdapter(private var context: Context) :
     private var query: String? = null
     var isEnglish = false
     private var tts: TextToSpeech = TextToSpeech(context, this)
+    lateinit var isFavourite: (WordData) -> Unit
 
     inner class WordViewHolder(private val binding: ItemWordBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(english: String, uzbek: String) {
+        fun bind(wordData: WordData) {
+//            if (wordData.is_favourite == 1) binding.imgLike.setImageResource(R.drawable.ic_favourite_2)
+//            else binding.imgLike.setImageResource(R.drawable.ic_favourite)
+
+            when (MySharedPref.getOpenScreen()) {
+
+                1 -> if (wordData.is_favourite == 1) binding.imgLike.setImageResource(R.drawable.ic_favourite_2) else binding.imgLike.setImageResource(
+                    R.drawable.ic_favourite
+                )
+                2 ->  if (wordData.is_favourite == 2) binding.imgLike.setImageResource(R.drawable.ic_favourite_2) else binding.imgLike.setImageResource(
+                    R.drawable.ic_favourite
+                )
+
+            }
+
+
             if (query == null) {
-                binding.uzbek.text = english
-                binding.english.text = uzbek
+                binding.uzbek.text = wordData.english
+                binding.english.text = wordData.uzbek
             } else {
-                binding.english.text = uzbek.createSpannable(query!!.toLowerCase(Locale.ROOT))
-                binding.uzbek.text = english
+                binding.english.text =
+                    wordData.uzbek.createSpannable(query!!.toLowerCase(Locale.ROOT))
+                binding.uzbek.text = wordData.english
             }
 
             binding.imgSpeak.setOnClickListener {
-                speakOut(english)
+                speakOut(wordData.english)
             }
 
             binding.imgSpeak.setOnClickListener {
-                speakOut(uzbek)
+                speakOut(wordData.uzbek)
+            }
+
+            binding.imgLike.setOnClickListener {
+                Log.d("TTT", "Adapter: IMGLIKE bosildi")
+                if (wordData.is_favourite == 0) {
+                    isFavourite.invoke(
+                        WordData(
+                            id = wordData.id,
+                            english = wordData.uzbek,
+                            type = wordData.type,
+                            transcript = wordData.transcript,
+                            uzbek = wordData.english,
+                            countable = wordData.countable,
+                            is_favourite = 1,
+                        )
+                    )
+                }
+                else {
+                    isFavourite.invoke(
+                        WordData(
+                            id = wordData.id,
+                            english = wordData.uzbek,
+                            type = wordData.type,
+                            transcript = wordData.transcript,
+                            uzbek = wordData.english,
+                            countable = wordData.countable,
+                            is_favourite = 0,
+                        )
+                    )
+                }
+
             }
         }
     }
@@ -64,16 +122,48 @@ class WordAdapter(private var context: Context) :
         if (isEnglish) {
             this.cursor?.let {
                 it.moveToPosition(position)
+
                 val english = it.getString(it.getColumnIndex("english"))
+                val id = it.getLong(it.getColumnIndex("id"))
                 val uzbek = it.getString(it.getColumnIndex("uzbek"))
-                holder.bind(english.toString(), uzbek.toString())
+                val transcript = it.getString(it.getColumnIndex("transcript"))
+                val is_favourite = it.getInt(it.getColumnIndex("is_favourite"))
+                val countable = it.getString(it.getColumnIndex("countable"))
+                val type = it.getString(it.getColumnIndex("type"))
+
+                val item = WordData(
+                    id,
+                    english.toString(),
+                    type,
+                    transcript,
+                    uzbek.toString(),
+                    countable,
+                    is_favourite,
+                )
+                holder.bind(item)
             }
         } else {
             this.cursor?.let {
                 it.moveToPosition(position)
+
                 val english = it.getString(it.getColumnIndex("english"))
+                val id = it.getLong(it.getColumnIndex("id"))
                 val uzbek = it.getString(it.getColumnIndex("uzbek"))
-                holder.bind(uzbek.toString(), english.toString())
+                val transcript = it.getString(it.getColumnIndex("transcript"))
+                val is_favourite = it.getInt(it.getColumnIndex("is_favourite"))
+                val countable = it.getString(it.getColumnIndex("countable"))
+                val type = it.getString(it.getColumnIndex("type"))
+
+                val item = WordData(
+                    id,
+                    uzbek.toString(),
+                    type,
+                    transcript,
+                    english.toString(),
+                    countable,
+                    is_favourite,
+                )
+                holder.bind(item)
             }
         }
     }
@@ -92,5 +182,13 @@ class WordAdapter(private var context: Context) :
     private fun speakOut(text: String) {
         tts.speak(text, TextToSpeech.QUEUE_FLUSH, null, null)
     }
+
+    // awfs
+
+//    @SuppressLint("NotifyDataSetChanged")
+//    fun setLanguages(bool: Boolean) {
+//        isEnglish = bool
+//        notifyDataSetChanged()
+//    }
 
 }

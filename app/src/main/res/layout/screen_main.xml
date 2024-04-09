@@ -1,82 +1,179 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/app_bar"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="?android:actionBarSize"
-        android:background="#fcf8f9"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent">
 
-        <TextView
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
+            android:layout_height="?android:actionBarSize"
+            android:background="#fcf8f9"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="Uz-En dictionary"
+                android:textColor="#CC000000"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/box_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            app:cardBackgroundColor="#fcf8f9"
+            app:cardCornerRadius="70dp"
+            app:cardElevation="0dp"
+            app:layout_constraintBottom_toBottomOf="@id/app_bar"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/btn_menu"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/bg_circle_item"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:selectableItemBackground"
+                android:padding="8dp"
+                android:src="@drawable/ic_menu" />
+
+        </androidx.cardview.widget.CardView>
+
+        <!--        <com.google.android.material.tabs.TabLayout-->
+        <!--            android:id="@+id/tabLayout"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="50dp"-->
+        <!--            android:background="#fcf8f9"-->
+        <!--            app:layout_constraintTop_toBottomOf="@id/app_bar"-->
+        <!--            app:layout_constraintVertical_bias="0"-->
+        <!--            app:tabBackground="@drawable/bg_tab"-->
+        <!--            app:tabIndicatorAnimationMode="linear"-->
+        <!--            app:tabIndicatorColor="#80D52027"-->
+        <!--            app:tabIndicatorHeight="5dp"-->
+        <!--            app:tabRippleColor="#fcf8f9"-->
+        <!--            app:tabSelectedTextColor="#B5373B"-->
+        <!--            app:tabTextAppearance="@style/MyTabLayoutStyle"-->
+        <!--            app:tabTextColor="#80D52027" />-->
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNavigationView"
+            style="@style/bottom_navigation"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:background="#fcf8f9"
+            android:paddingTop="12dp"
+            android:paddingBottom="6dp"
+            android:windowSoftInputMode="adjustPan"
+            app:itemIconTint="@color/color"
+            app:itemTextAppearanceActive="@style/BottomNavigationView"
+            app:itemTextColor="@color/color"
+            app:labelVisibilityMode="labeled"
+            app:layout_constraintEnd_toStartOf="@id/linear2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/app_bar"
+            app:menu="@menu/my_bottom_menu" />
+
+
+        <LinearLayout
+            android:id="@+id/linear2"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:background="#fcf8f9"
             android:gravity="center"
-            android:text="Uz-En dictionary"
-            android:textColor="#CC000000"
-            android:textSize="22sp"
-            android:textStyle="bold" />
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/bottomNavigationView"
+            app:layout_constraintTop_toBottomOf="@id/app_bar"
+            app:layout_constraintVertical_weight="1">
 
 
-    </com.google.android.material.appbar.AppBarLayout>
+            <ImageView
+                android:id="@+id/img2"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginBottom="2dp"
+                android:src="@drawable/ic_voice" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/box_menu"
+            <TextView
+                android:id="@+id/text2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:fontFamily="@font/lekton_bold"
+                android:text="Speak"
+                android:textColor="#80D52027" />
+
+        </LinearLayout>
+
+        <!--        <LinearLayout-->
+        <!--            android:id="@+id/linear3"-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="80dp"-->
+        <!--            android:background="#fcf8f9"-->
+        <!--            android:gravity="center"-->
+        <!--            android:orientation="vertical"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintStart_toEndOf="@id/linear2"-->
+        <!--            app:layout_constraintTop_toBottomOf="@id/app_bar"-->
+        <!--            app:layout_constraintVertical_weight="1">-->
+
+        <!--            <ImageView-->
+        <!--                android:id="@+id/img3"-->
+        <!--                android:layout_width="32dp"-->
+        <!--                android:layout_height="32dp"-->
+        <!--                android:layout_marginBottom="2dp"-->
+        <!--                android:src="@drawable/ic_transfer" />-->
+
+        <!--            <TextView-->
+        <!--                android:id="@+id/text3"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:fontFamily="@font/lekton_bold"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_marginTop="2dp"-->
+        <!--                android:text="en-uz"-->
+        <!--                android:textColor="#80D52027" />-->
+
+
+        <!--        </LinearLayout>-->
+
+
+
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/bottomNavigationView" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        app:cardBackgroundColor="#fcf8f9"
-        app:cardCornerRadius="70dp"
-        app:cardElevation="0dp"
-        app:layout_constraintBottom_toBottomOf="@id/app_bar"
-        app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/nav_header_main"
+        app:menu="@menu/nav_menu" />
 
-        <ImageView
-            android:id="@+id/btn_menu"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@drawable/bg_circle_item"
-            android:clickable="true"
-            android:focusable="true"
-            android:foreground="?android:selectableItemBackground"
-            android:padding="8dp"
-            android:src="@drawable/ic_menu" />
-
-    </androidx.cardview.widget.CardView>
-
-
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabLayout"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#fcf8f9"
-        app:layout_constraintTop_toBottomOf="@id/app_bar"
-        app:layout_constraintVertical_bias="0"
-        app:tabBackground="@drawable/bg_tab"
-        app:tabIndicatorAnimationMode="linear"
-        app:tabIndicatorColor="#80D52027"
-        app:tabIndicatorHeight="5dp"
-        app:tabRippleColor="#fcf8f9"
-        app:tabSelectedTextColor="#B5373B"
-        app:tabTextAppearance="@style/MyTabLayoutStyle"
-        app:tabTextColor="#80D52027" />
-
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/viewPager"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tabLayout" />
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.drawerlayout.widget.DrawerLayout>

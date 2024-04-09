@@ -38,6 +38,13 @@ fun Fragment.popBackStack() {
     requireActivity().popBackStack()
 }
 
+fun Fragment.openFragment(fragment: Fragment) {
+    val transaction = childFragmentManager.beginTransaction()
+    transaction.replace(R.id.viewPager, fragment) // Use the appropriate container ID
+    transaction.addToBackStack(null) // Add to back stack if needed
+    transaction.commit()
+}
+
 fun String.createSpannable(query: String): SpannableString {
     val spannable = SpannableString(this)
     val startIndex = this.indexOf(query)

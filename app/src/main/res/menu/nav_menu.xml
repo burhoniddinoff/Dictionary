@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_menu"
+        android:title="Menu"
+        tools:ignore="HardcodedText" />
+
+<!--    <item-->
+<!--        android:id="@+id/nav_uzbek"-->
+<!--        android:title="All uzbek word"-->
+<!--        tools:ignore="HardcodedText" />-->
+
+<!--    <item-->
+<!--        android:id="@+id/nav_english"-->
+<!--        android:title="All english word"-->
+<!--        tools:ignore="HardcodedText" />-->
+
+    <item
+        android:id="@+id/nav_favorite"
+        android:title="Favorite word"
+        tools:ignore="HardcodedText" />
+
+    <item
+        android:id="@+id/nav_settings"
+        android:title="Settings"
+        tools:ignore="HardcodedText" />
+
+</menu>

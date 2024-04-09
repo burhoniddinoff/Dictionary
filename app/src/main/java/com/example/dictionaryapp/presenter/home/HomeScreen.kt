@@ -12,6 +12,13 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.dictionaryapp.R
 import com.example.dictionaryapp.databinding.ScreenHomeBinding
 import com.example.dictionaryapp.presenter.adapter.WordAdapter
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MultipartBody
+import okhttp3.OkHttpClient
+import okhttp3.Request
 
 class HomeScreen : Fragment(R.layout.screen_home), HomeContract.View {
     private val binding by viewBinding(ScreenHomeBinding::bind)
@@ -24,6 +31,11 @@ class HomeScreen : Fragment(R.layout.screen_home), HomeContract.View {
 
         adapter = WordAdapter(requireContext())
         binding.recycler.adapter = adapter
+
+        adapter.isFavourite = {
+            presenter.updateData(data = it)
+            Log.d("TTT", "HomeScreen: IMGLIKE bosildi")
+        }
 
         binding.imgTransfer.setOnClickListener {
             if (adapter.isEnglish) {
@@ -44,8 +56,13 @@ class HomeScreen : Fragment(R.layout.screen_home), HomeContract.View {
             override fun onQueryTextChange(newText: String?): Boolean {
                 currentQuery = newText
                 if (currentQuery == null) presenter.loadWords()
-                else if (adapter.isEnglish) presenter.loadWordsByUz(currentQuery!!)
-                else presenter.loadWordsByEn(currentQuery!!)
+                else if (adapter.isEnglish) {
+                    presenter.loadWordsByUz(currentQuery!!)
+                    Log.d("TTT", "HOME SCREEN ${adapter.isEnglish}")
+                } else {
+                    presenter.loadWordsByEn(currentQuery!!)
+                    Log.d("TTT", "HOME SCREEN ${adapter.isEnglish}")
+                }
 
                 return true
             }
@@ -59,6 +76,10 @@ class HomeScreen : Fragment(R.layout.screen_home), HomeContract.View {
         }
 
         presenter.loadWords()
+    }
+
+    fun searchText(text: String) {
+        binding.searchView.setQuery(text, true)
     }
 
     override fun showWords(cursor: Cursor) {

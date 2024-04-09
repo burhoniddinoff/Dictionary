@@ -65,5 +65,6 @@ dependencies {
 
 
     // A
-    implementation ("com.github.myinnos:AlphabetIndex-Fast-Scroll-RecyclerView:1.0.98")
+    implementation("com.squareup.okhttp3:okhttp:4.9.1")
+
 }
