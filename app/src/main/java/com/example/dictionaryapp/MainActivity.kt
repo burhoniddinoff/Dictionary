@@ -2,10 +2,7 @@ package com.example.dictionaryapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.dictionaryapp.presenter.home.HomeScreen
 import com.example.dictionaryapp.presenter.main.MainScreen
-import com.example.dictionaryapp.utils.addScreen
-import com.example.dictionaryapp.utils.replaceScreen
 import com.example.dictionaryapp.utils.replaceScreenWithoutSave
 
 class MainActivity : AppCompatActivity() {

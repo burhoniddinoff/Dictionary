@@ -38,17 +38,6 @@ class WordAdapter(private var context: Context) :
 //            if (wordData.is_favourite == 1) binding.imgLike.setImageResource(R.drawable.ic_favourite_2)
 //            else binding.imgLike.setImageResource(R.drawable.ic_favourite)
 
-            when (MySharedPref.getOpenScreen()) {
-
-                1 -> if (wordData.is_favourite == 1) binding.imgLike.setImageResource(R.drawable.ic_favourite_2) else binding.imgLike.setImageResource(
-                    R.drawable.ic_favourite
-                )
-                2 ->  if (wordData.is_favourite == 2) binding.imgLike.setImageResource(R.drawable.ic_favourite_2) else binding.imgLike.setImageResource(
-                    R.drawable.ic_favourite
-                )
-
-            }
-
 
             if (query == null) {
                 binding.uzbek.text = wordData.english
@@ -63,40 +52,30 @@ class WordAdapter(private var context: Context) :
                 speakOut(wordData.english)
             }
 
-            binding.imgSpeak.setOnClickListener {
-                speakOut(wordData.uzbek)
-            }
+//            binding.imgSpeak.setOnClickListener {
+//                speakOut(wordData.uzbek)
+//            }
 
             binding.imgLike.setOnClickListener {
                 Log.d("TTT", "Adapter: IMGLIKE bosildi")
-                if (wordData.is_favourite == 0) {
-                    isFavourite.invoke(
-                        WordData(
-                            id = wordData.id,
-                            english = wordData.uzbek,
-                            type = wordData.type,
-                            transcript = wordData.transcript,
-                            uzbek = wordData.english,
-                            countable = wordData.countable,
-                            is_favourite = 1,
-                        )
-                    )
-                }
-                else {
-                    isFavourite.invoke(
-                        WordData(
-                            id = wordData.id,
-                            english = wordData.uzbek,
-                            type = wordData.type,
-                            transcript = wordData.transcript,
-                            uzbek = wordData.english,
-                            countable = wordData.countable,
-                            is_favourite = 0,
-                        )
-                    )
-                }
 
+
+                isFavourite.invoke(
+                    WordData(
+                        id = wordData.id,
+                        english = wordData.uzbek,
+                        type = wordData.type,
+                        transcript = wordData.transcript,
+                        uzbek = wordData.english,
+                        countable = wordData.countable,
+                        is_favourite = if (wordData.is_favourite == 0) 1 else 0,
+                    )
+                )
+
+                binding.imgLike.setImageResource(if (wordData.is_favourite == 0) R.drawable.ic_favourite_2 else R.drawable.ic_favourite)
             }
+
+            binding.imgLike.setImageResource(if (wordData.is_favourite == 0) R.drawable.ic_favourite else R.drawable.ic_favourite_2)
         }
     }
 
