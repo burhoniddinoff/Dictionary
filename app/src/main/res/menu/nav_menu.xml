@@ -3,8 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:icon="@drawable/ic_home_3"
         android:id="@+id/nav_menu"
-        android:title="Menu"
+        android:title="Home"
         tools:ignore="HardcodedText" />
 
 <!--    <item-->
@@ -18,13 +19,21 @@
 <!--        tools:ignore="HardcodedText" />-->
 
     <item
+        android:icon="@drawable/ic_bookmarks"
         android:id="@+id/nav_favorite"
         android:title="Favorite word"
         tools:ignore="HardcodedText" />
 
     <item
-        android:id="@+id/nav_settings"
-        android:title="Settings"
+        android:icon="@drawable/ic_share_2"
+        android:id="@+id/nav_share"
+        android:title="Share"
+        tools:ignore="HardcodedText" />
+
+    <item
+        android:icon="@drawable/ic_rate"
+        android:id="@+id/nav_rate"
+        android:title="Rate this app"
         tools:ignore="HardcodedText" />
 
 </menu>

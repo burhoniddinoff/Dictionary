@@ -25,4 +25,8 @@ interface WordDao {
 
     @Query("Select * From dictionary where is_favourite = 2")
     fun cursorByFavouriteUZ(): List<WordData>
+
+    @Query("SELECT * FROM dictionary WHERE dictionary.is_favourite =:query")
+    fun getBookmarks(query: Int): Cursor
+
 }

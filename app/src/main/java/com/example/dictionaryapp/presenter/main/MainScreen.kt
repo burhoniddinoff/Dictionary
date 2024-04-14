@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.speech.RecognizerIntent
 import android.speech.tts.TextToSpeech
@@ -25,6 +26,7 @@ import com.example.dictionaryapp.presenter.adapter.ViewPagerAdapter
 import com.example.dictionaryapp.presenter.adapter.WordAdapter
 import com.example.dictionaryapp.presenter.home.HomeScreen
 import com.example.dictionaryapp.presenter.saved.SavedScreen
+import com.example.dictionaryapp.utils.popBackStack
 import com.example.dictionaryapp.utils.replaceScreen
 
 class MainScreen : Fragment(R.layout.screen_main) {
@@ -81,14 +83,7 @@ class MainScreen : Fragment(R.layout.screen_main) {
         // DRAWER LAYOUT
 
         drawerLayout = binding.drawerLayout
-        drawerToggle = ActionBarDrawerToggle(
-            requireActivity(),
-            drawerLayout,
-            R.string.navigation_drawer_open,
-            R.string.navigation_drawer_close
-        )
-        drawerLayout.addDrawerListener(drawerToggle)
-        drawerToggle.syncState()
+
 
         binding.btnMenu.setOnClickListener {
             drawerLayout.openDrawer(GravityCompat.START)
@@ -99,18 +94,52 @@ class MainScreen : Fragment(R.layout.screen_main) {
         navigationView.setNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.nav_menu -> {
-
+                    drawerLayout.close()
                     true
                 }
 
 
                 R.id.nav_favorite -> {
                     replaceScreen(SavedScreen())
+                    drawerLayout.close()
                     true
                 }
 
-                R.id.nav_settings -> {
+                R.id.nav_share -> {
+                    try {
+                        startActivity(
+                            Intent(
+                                Intent.ACTION_VIEW,
+                                Uri.parse("market://details?id=${requireContext().packageName}")
+                            )
+                        )
+                    } catch (e: ActivityNotFoundException) {
+                        startActivity(
+                            Intent(
+                                Intent.ACTION_VIEW,
+                                Uri.parse("https://play.google.com/store/apps/details?id=${requireContext().packageName}")
+                            )
+                        )
+                    }
+                    true
+                }
 
+                R.id.nav_rate -> {
+                    try {
+                        startActivity(
+                            Intent(
+                                Intent.ACTION_VIEW,
+                                Uri.parse("market://details?id=${requireContext().packageName}")
+                            )
+                        )
+                    } catch (e: ActivityNotFoundException) {
+                        startActivity(
+                            Intent(
+                                Intent.ACTION_VIEW,
+                                Uri.parse("https://play.google.com/store/apps/details?id=${requireContext().packageName}")
+                            )
+                        )
+                    }
                     true
                 }
 

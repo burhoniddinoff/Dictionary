@@ -1,9 +1,8 @@
 package com.example.dictionaryapp.presenter.adapter
 
 import android.annotation.SuppressLint
-import android.app.VoiceInteractor
-import android.database.Cursor
 import android.content.Context
+import android.database.Cursor
 import android.speech.tts.TextToSpeech
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,16 +10,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dictionaryapp.R
-import com.example.dictionaryapp.data.local.MySharedPref
 import com.example.dictionaryapp.data.model.WordData
 import com.example.dictionaryapp.databinding.ItemWordBinding
 import com.example.dictionaryapp.utils.createSpannable
-import okhttp3.MediaType.Companion.toMediaType
-import okhttp3.MultipartBody
-import okhttp3.OkHttpClient
-import okhttp3.Request
 import java.util.Locale
-import kotlin.system.exitProcess
 
 class WordAdapter(private var context: Context) :
     RecyclerView.Adapter<WordAdapter.WordViewHolder>(), TextToSpeech.OnInitListener {
@@ -42,10 +35,17 @@ class WordAdapter(private var context: Context) :
             if (query == null) {
                 binding.uzbek.text = wordData.english
                 binding.english.text = wordData.uzbek
+
+                Log.d("TTT", "queryNull: english: ${wordData.english} " +
+                        "uzbek: ${wordData.uzbek}")
+
             } else {
                 binding.english.text =
                     wordData.uzbek.createSpannable(query!!.toLowerCase(Locale.ROOT))
                 binding.uzbek.text = wordData.english
+
+                Log.d("TTT", "!queryNull: english: ${wordData.english} " +
+                        "uzbek: ${wordData.uzbek}")
             }
 
             binding.imgSpeak.setOnClickListener {
@@ -59,18 +59,35 @@ class WordAdapter(private var context: Context) :
             binding.imgLike.setOnClickListener {
                 Log.d("TTT", "Adapter: IMGLIKE bosildi")
 
-
-                isFavourite.invoke(
-                    WordData(
-                        id = wordData.id,
-                        english = wordData.uzbek,
-                        type = wordData.type,
-                        transcript = wordData.transcript,
-                        uzbek = wordData.english,
-                        countable = wordData.countable,
-                        is_favourite = if (wordData.is_favourite == 0) 1 else 0,
+                if (isEnglish) {
+                    isFavourite.invoke(
+                        WordData(
+                            id = wordData.id,
+                            english = wordData.english,
+                            type = wordData.type,
+                            transcript = wordData.transcript,
+                            uzbek = wordData.uzbek,
+                            countable = wordData.countable,
+                            is_favourite = if (wordData.is_favourite == 0) 1 else 0,
+                        )
                     )
-                )
+                } else {
+                    isFavourite.invoke(
+                        WordData(
+                            id = wordData.id,
+                            english = wordData.uzbek,
+                            type = wordData.type,
+                            transcript = wordData.transcript,
+                            uzbek = wordData.english,
+                            countable = wordData.countable,
+                            is_favourite = if (wordData.is_favourite == 0) 1 else 0,
+                        )
+                    )
+                }
+
+
+
+                notifyItemChanged(adapterPosition)
 
                 binding.imgLike.setImageResource(if (wordData.is_favourite == 0) R.drawable.ic_favourite_2 else R.drawable.ic_favourite)
             }
@@ -98,10 +115,11 @@ class WordAdapter(private var context: Context) :
 
     @SuppressLint("Range")
     override fun onBindViewHolder(holder: WordViewHolder, position: Int) {
+        Log.d("TTT", "onBindViewHolder $isEnglish")
+
         if (isEnglish) {
             this.cursor?.let {
                 it.moveToPosition(position)
-
                 val english = it.getString(it.getColumnIndex("english"))
                 val id = it.getLong(it.getColumnIndex("id"))
                 val uzbek = it.getString(it.getColumnIndex("uzbek"))
@@ -161,8 +179,6 @@ class WordAdapter(private var context: Context) :
     private fun speakOut(text: String) {
         tts.speak(text, TextToSpeech.QUEUE_FLUSH, null, null)
     }
-
-    // awfs
 
 //    @SuppressLint("NotifyDataSetChanged")
 //    fun setLanguages(bool: Boolean) {

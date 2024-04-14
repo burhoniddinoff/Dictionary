@@ -10,4 +10,6 @@ interface AppRepository {
     fun updateData(data: WordData)
     fun cursorByFavourite(): List<WordData>
     fun cursorByFavouriteUz(): List<WordData>
+
+    fun getAllBookmarks(query: Int): Cursor
 }

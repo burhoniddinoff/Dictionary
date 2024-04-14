@@ -12,13 +12,6 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.dictionaryapp.R
 import com.example.dictionaryapp.databinding.ScreenHomeBinding
 import com.example.dictionaryapp.presenter.adapter.WordAdapter
-import kotlinx.coroutines.DelicateCoroutinesApi
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import okhttp3.MediaType.Companion.toMediaType
-import okhttp3.MultipartBody
-import okhttp3.OkHttpClient
-import okhttp3.Request
 
 class HomeScreen : Fragment(R.layout.screen_home), HomeContract.View {
     private val binding by viewBinding(ScreenHomeBinding::bind)

@@ -23,4 +23,6 @@ class AppRepositoryImpl : AppRepository {
     override fun updateData(data: WordData) = wordDao.updateData(data)
     override fun cursorByFavourite(): List<WordData> = wordDao.cursorByFavourite()
     override fun cursorByFavouriteUz(): List<WordData> = wordDao.cursorByFavouriteUZ()
+
+    override fun getAllBookmarks(query: Int): Cursor = wordDao.getBookmarks(query)
 }

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">DictionaryApp</string>
+    <string name="app_name">Dictionary App</string>
     <string name="navigation_drawer_open">drawer open\n</string>
     <string name="navigation_drawer_close">drawer close\n</string>
 </resources>

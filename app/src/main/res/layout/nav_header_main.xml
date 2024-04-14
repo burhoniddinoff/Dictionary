@@ -10,10 +10,10 @@
     android:paddingBottom="8dp">
 
     <ImageView
-        android:layout_width="64dp"
-        android:layout_height="64dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_gravity="center"
-        android:src="@drawable/uz_en" />
+        android:src="@drawable/uzen_dictionary" />
 
     <TextView
         android:layout_width="wrap_content"
